@@ -1,22 +1,26 @@
-
 module.exports = {
-
-  development: {
-    client: 'sqlite3',
+  client:'sqlite3',
+  connection: {
+    filename: './data/wordsafe.db3'
+  },
+  useNullAsDefault: true,
+  migrations: {
+    directory: './data/migrations'
+  },
+  seeds: {
+    directory: './data/seeds'
+  },
+  development:  {
+    client:'sqlite3',
     connection: {
       filename: './data/wordsafe.db3'
     },
-
-    userNullAsDefault: true,
-
+    useNullAsDefault: true,
     migrations: {
       directory: './data/migrations'
     },
-
     seeds: {
       directory: './data/seeds'
     }
-
   }
-
 }

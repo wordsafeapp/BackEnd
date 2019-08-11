@@ -1,8 +1,8 @@
-const express = require('express')
-const knex = require('knex')
+const express = require('express');
+const knex = require('knex');
 
-const db = require('../data/db-config.js')
+const db = require('../data/db-config.js');
 
-const router = express.Router()
+const router = express.Router();
 
-module.exports = router
+module.exports = router;

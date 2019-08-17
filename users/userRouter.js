@@ -1,12 +1,26 @@
 const express = require('express')
-const knex = require('knex')
-
-const db = require('../data/db-config.js')
 
 const router = express.Router()
 
+const Users = require('./userModel.js')
+
 router.get('/', async ( req, res ) => {
 
+})
+
+router.get('/:id', validateUserId, ( req, res ) => {
+  res.status(200).json(req.user)
+})
+
+router.post('/', validateUser, async ( req, res ) => {
+  const newUser = req.body
+  try {
+    const user = await Users.addUser(newUser)
+    res.status(201).json(user)
+  }
+  catch(error) {
+    res.status(500).json(error)
+  }
 })
 
 // validation middlewares
@@ -14,9 +28,9 @@ router.get('/', async ( req, res ) => {
 async function validateUserId( req, res, next ) {
   const { id } = req.params
   try {
-    const user = await db('Users').where({id})
+    const user = await Users.getUserById(id)
     if(user.length) {
-      req.user = userRouter
+      req.user = user
       next()
     } else  {
       res.status(404).json({ message: `User with id ${id} does not exist` })
